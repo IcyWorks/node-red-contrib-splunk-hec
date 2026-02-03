@@ -25,7 +25,7 @@ npm install -g node-red-contrib-splunk-hec
 From github:
 Navigate to the your home directory on linux is is ~/.node-red/node-modules
 ```sh
-git clone https://github.com/IcyWorks/Splunk-HEC.git
+git clone https://github.com/IcyWorks/node-red-contrib-splunk-hec.git
 ```
 ```sh
 cd splunk-hec
