@@ -2,21 +2,23 @@ var SplunkLogger = require("splunk-logging").Logger;
 
 
 module.exports = function(RED) {
-    function HTTPEventCollector(config) {
+    function HEC(config) {
         RED.nodes.createNode(this, config);
 
         var context = this.context();
         var node = this
         var server = RED.nodes.getNode(config.server);
         var message = null;
-        
+
         /**
          * Only the token property is required.
          */
+		this.metadataName = config.metadataName || "metadata";
         this.SourceType = server.SourceType;
         this.Host = (config.Host.toString() != "") ? config.Host.toString() : server.Host;
         this.Source = (config.Source.toString() != "") ? config.Source.toString() : server.Source;
         this.Index = (config.Index.toString() != "") ? config.Index.toString() : server.Index;
+        this.name = (config.name.toString() != "") ? config.name.toString() : server.name;
 
         var splunkConfig = {
             token: server.Token,
@@ -27,7 +29,7 @@ module.exports = function(RED) {
 
             // Create a new logger
             var Logger = new SplunkLogger(splunkConfig);
-            
+
             Logger.error = function(err, context) {
                 // Handle errors here
                 if (server.LogConsole == true)
@@ -51,24 +53,23 @@ module.exports = function(RED) {
                 message = msg
             }
 
-            var payload = {
-                // Data sent from previous node msg.payload
-                message: message,
-                // Metadata
-                    metadata: {
-                        source: this.Source,
-                        sourcetype: this.SourceType,
-                        index: this.Index,
-                        host: this.Host,
-                    },
-                    // Severity is also optional
-                severity: level
-            
-            };
+			var payload = {
+				message: message,
+				severity: level
+			};
+
+			// Build metadata object
+			payload[this.metadataName] = {
+				source: this.Source,
+				sourcetype: this.SourceType,
+				index: this.Index,
+				name: this.name,
+				host: this.Host
+			};
 
             if (server.LogConsole == true)
                 console.log("Sending payload", payload);
-                
+
             Logger.send(payload, function(err, resp, body) {
                 // If successful, body will be { text: 'Success', code: 0 }
                 if (server.LogConsole == true)
@@ -78,5 +79,5 @@ module.exports = function(RED) {
 
         });
     }
-    RED.nodes.registerType("splunk-http-event-collector", HTTPEventCollector);
+    RED.nodes.registerType("splunk-hec", HEC);
 };

@@ -1,7 +1,8 @@
 <script type="text/javascript">
-    RED.nodes.registerType('splunk-http-event-config',{
+    RED.nodes.registerType('splunk-hec-config',{
         category: 'config',
         defaults: {
+            name: {value:""},
             URI: {value:"", required:true},
             Token: {value:"", required:true},
             SourceType: {value:"", required:true},
@@ -12,15 +13,19 @@
             LogConsole: {value:"", required:true}
         },
         label: function() {
-            return "splunk-http-event-config";
+            return this.name || "splunk-hec-config";
         }
     });
 </script>
 
-<script type="text/html" data-template-name="splunk-http-event-config">
+<script type="text/html" data-template-name="splunk-hec-config">
     <div class="form-row">
         <div style="min-width: 600px;"></div>
     </div>
+    <div class="form-row">
+        <label for="node-config-input-name" style="width:150px;">Config Name</label>
+        <input type="text" id="node-config-input-name" placeholder="ISM Email, PDU data...">
+    </div>	
     <div class="form-row">
         <label for="node-config-input-URI" style="width:150px;">Splunk URI</label>
         <input type="text" id="node-config-input-URI" placeholder="https://localhost:8088">
@@ -56,9 +61,9 @@
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="splunk-http-event-config">
+<script type="text/x-red" data-help-name="splunk-hec-config">
     <p>
-        This node is a configuration node for the HTTP Event Collector and defines the defaults. Some of these can also be overridden in the event collector 
+        This node is a configuration node for the splunk-hec node and defines the defaults. Some of these can also be overridden in the event collector
         node itself if you need to push to a different index inside the flow.
     </p>
 </script>

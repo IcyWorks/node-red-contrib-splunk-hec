@@ -1,6 +1,7 @@
 module.exports = function(RED) {
-    function HTTPEventConfig(c) {
+    function HEC(c) {
         RED.nodes.createNode(this,c);
+        this.name = c.name;
         this.URI = c.URI;
         this.Token = c.Token;
         this.SourceType = c.SourceType;
@@ -10,5 +11,5 @@ module.exports = function(RED) {
         this.LogLevel = c.LogLevel;
         this.LogConsole = c.LogConsole;
     }
-    RED.nodes.registerType("splunk-http-event-config", HTTPEventConfig);
+    RED.nodes.registerType("splunk-hec-config", HEC);
 };
