@@ -3,14 +3,18 @@
 The purpose of this project is to allow node-red to publish a node-red payload to Splunk HEC endpoints. 
 
 NOTE: This is a work in progress as at 03/02/2026
-Please do not use until this message is updated to "ready for use."
+Please do not use until this message is updated to a ready for use.
 
 ## Motivation
 
 Original Node created and published by gdziuba
 https://github.com/gdziuba/http-event-collector.git
-Lacked ability to name nodes or the saved configurations. Our organisation uses this extensively and needed a way to distinguish between multiple saved configs.
-This code has been ammended to include these missing features.
+
+
+Originally lacked ability to name nodes or the saved configurations. Our organisation uses this extensively and needed a way to distinguish between multiple saved configs.   This code has been ammended to include these missing features.
+
+
+Updated by Ivan Hibbert with assitance from Pascal Van Mello.
 
 ## Installation
 

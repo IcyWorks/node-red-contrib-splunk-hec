@@ -2,7 +2,7 @@ var SplunkLogger = require("splunk-logging").Logger;
 
 
 module.exports = function(RED) {
-    function HEC(config) {
+    function SplunkHec(config) {
         RED.nodes.createNode(this, config);
 
         var context = this.context();
@@ -14,11 +14,17 @@ module.exports = function(RED) {
          * Only the token property is required.
          */
 		this.metadataName = config.metadataName || "metadata";
+		this.name = (config.name.toString() != "") ? config.name.toString() : server.name;
         this.SourceType = server.SourceType;
-        this.Host = (config.Host.toString() != "") ? config.Host.toString() : server.Host;
-        this.Source = (config.Source.toString() != "") ? config.Source.toString() : server.Source;
-        this.Index = (config.Index.toString() != "") ? config.Index.toString() : server.Index;
-        this.name = (config.name.toString() != "") ? config.name.toString() : server.name;
+        this.URI = server.URI;
+        this.Token = server.Token;
+        this.Host = server.Host;
+        this.Index = server.Index;
+        this.Source = server.Source;
+        this.LogLevel = server.LogLevel;
+        this.LogConsole = server.LogConsole;
+
+
 
         var splunkConfig = {
             token: server.Token,
@@ -64,7 +70,11 @@ module.exports = function(RED) {
 				sourcetype: this.SourceType,
 				index: this.Index,
 				name: this.name,
-				host: this.Host
+				host: this.Host,
+				uri: this.URI,
+				token: this.Token,
+				loglevel: this.LogLevel,
+				logconsole: this.LogConsole
 			};
 
             if (server.LogConsole == true)
@@ -79,5 +89,5 @@ module.exports = function(RED) {
 
         });
     }
-    RED.nodes.registerType("splunk-hec", HEC);
+    RED.nodes.registerType("splunk-hec", SplunkHec);
 };

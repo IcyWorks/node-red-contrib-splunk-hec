@@ -19,7 +19,7 @@
   ],
   "node-red": {
     "nodes": {
-      "splunk-hec": "splunk-hec/splunk-hec-config.js",
+      "splunk-hec-config": "splunk-hec/splunk-hec-config.js",
       "splunk-hec": "splunk-hec/splunk-hec.js"
     }
   }

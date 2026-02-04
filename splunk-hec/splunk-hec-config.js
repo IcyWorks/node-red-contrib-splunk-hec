@@ -1,5 +1,5 @@
 module.exports = function(RED) {
-    function HEC(c) {
+    function SplunkHecConfig(c) {
         RED.nodes.createNode(this,c);
         this.name = c.name;
         this.URI = c.URI;
@@ -11,5 +11,5 @@ module.exports = function(RED) {
         this.LogLevel = c.LogLevel;
         this.LogConsole = c.LogConsole;
     }
-    RED.nodes.registerType("splunk-hec-config", HEC);
+    RED.nodes.registerType("splunk-hec-config", SplunkHecConfig);
 };
