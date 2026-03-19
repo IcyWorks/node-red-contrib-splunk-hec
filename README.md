@@ -2,8 +2,8 @@
 
 The purpose of this project is to allow node-red to publish a node-red payload to Splunk HEC endpoints. 
 
-NOTE: This is a work in progress as at 03/02/2026
-Please do not use until this message is updated to a ready for use.
+NOTE: Published as at 19/03/2026
+This package is now ready for use.
 
 ## Motivation
 
