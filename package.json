@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-splunk-hec",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Node-RED node for sending events to Splunk HEC",  
   "dependencies": {
     "splunk-logging": "^0.11.1"
@@ -18,9 +18,14 @@
     "node-red"
   ],
   "node-red": {
+	"version": ">=4.0.0",
     "nodes": {
       "splunk-hec-config": "splunk-hec/splunk-hec-config.js",
       "splunk-hec": "splunk-hec/splunk-hec.js"
-    }
+    },
+   "engines": {
+   "node": ">=22.0.0"
+  },
+  "author": "Ivan Hibbert"
   }
 }
